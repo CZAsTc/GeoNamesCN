@@ -73,13 +73,13 @@ def is_chinese(text: str) -> bool:
     )
 
 def calculate_language_precedence(language: Optional[str]) -> int:
-    """Assign a numeric priority to a language code for sorting.
+    """Assign a numeric precedence to a language code for sorting.
 
     Args:
         language (Optional[str]): Language code or None.
 
     Returns:
-        int: A smaller value indicates a higher priority.
+        int: A smaller value indicates a higher precedence.
     """
     if language and language in CHINESE_LANGUAGE_CODE:
         return CHINESE_LANGUAGE_CODE.index(language)
@@ -201,18 +201,18 @@ def export_to_parquet(input_file: str, output_file: str, local_converter: opencc
         .alias('is_chinese')
     ).filter(polars.col('is_chinese'))
 
-    # Assign numeric language priority
+    # Assign numeric language precedence
     df = df.with_columns(
         polars.col('iso_language').map_elements(
             calculate_language_precedence,
             return_dtype=polars.Int64,
             skip_nulls=False
-        ).alias('language_priority')
+        ).alias('language_precedence')
     )
 
     # Sort and deduplicate (keep first record per geoname_id)
     df = df.sort(
-        ['geoname_id', 'language_priority', 'is_preferred_name', 'is_short_name'],
+        ['geoname_id', 'language_precedence', 'is_preferred_name', 'is_short_name'],
         descending=[False, False, True, False]
     ).unique(subset=['geoname_id'], keep='first')
 
@@ -231,7 +231,7 @@ def export_to_parquet(input_file: str, output_file: str, local_converter: opencc
         'is_preferred_name',
         'is_short_name',
         'is_chinese',
-        'language_priority'
+        'language_precedence'
     ])
     df = df.rename({'alternate_name': 'zh_name'})
     df.write_parquet(output_file)
@@ -253,7 +253,7 @@ def get_city_zh_name(data_frame: polars.DataFrame, geoname_id: Optional[int]) ->
     if df_filtered.is_empty():
         return None
     result = df_filtered.sort(
-        ['language_priority', 'is_preferred_name', 'is_short_name'],
+        ['language_precedence', 'is_preferred_name', 'is_short_name'],
         descending=[False, True, False]
     ).head(1)
     return result['alternate_name'].to_numpy().flatten().tolist()[0]
