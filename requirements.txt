@@ -1,0 +1,7 @@
+certifi
+charset-normalizer
+idna
+OpenCC
+polars
+requests
+urllib3

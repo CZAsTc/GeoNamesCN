@@ -1,0 +1,93 @@
+name: Process and Update
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compare ETag
+        id: compare_etag
+        run: |
+            echo "Checking ETag from GeoNames and latest release..."
+
+            curl -f -L -o release_etag.txt https://github.com/CZAsTc/GeoNamesCN/releases/latest/download/alternateNamesV2-ETag.txt || touch release_etag.txt
+
+            geonames_etag=$(curl -Is https://download.geonames.org/export/dump/alternateNamesV2.zip | grep -i ETag | cut -d' ' -f2 | tr -d '\r' || true)
+            release_etag=$(cat release_etag.txt | tr -d '\r' || true)
+
+            echo "GeoNames ETag: $geonames_etag"
+            echo "Release ETag:  $release_etag"
+
+            if [ "$release_etag" == "$geonames_etag" ]; then
+              echo "ETags match. No update needed. Skipping the rest of the workflow."
+              echo "SKIP=true" >> $GITHUB_ENV
+            else
+              echo "ETags do not match. Continuing the workflow."
+              echo "SKIP=false" >> $GITHUB_ENV
+            fi
+
+      - name: Check out repository
+        if: env.SKIP != 'true'
+        uses: actions/checkout@v4
+
+      - name: Install aria2
+        if: env.SKIP != 'true'
+        run: sudo apt update && sudo apt install -y aria2
+
+      - name: Set up Python
+        if: env.SKIP != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        if: env.SKIP != 'true'
+        run: |
+          pip install -r requirements.txt
+
+      - name: Process alternateNamesV2 data
+        if: env.SKIP != 'true'
+        run: |
+          python main.py
+          mkdir -p upload
+          cp -v output/alternateNamesV2-ETag.txt upload
+          cp -v output/alternateNamesV2.parquet upload
+          echo "TAG_NAME=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
+
+      - name: Push to "download" branch
+        if: env.SKIP != 'true'
+        run: |
+          cd upload
+          git init
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git checkout -b download
+          git add .
+          git commit -m "${{ env.TAG_NAME }}"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f origin download
+
+      - name: Upload to Releases
+        if: env.SKIP != 'true'
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          body: ${{ env.TAG_NAME }}
+          files: upload/alternateNamesV2-ETag.txt,upload/alternateNamesV2.parquet
+
+      - name: Remove old Releases
+        if: env.SKIP != 'true'
+        uses: dev-drprasad/delete-older-releases@master
+        with:
+          keep_latest: 2
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
