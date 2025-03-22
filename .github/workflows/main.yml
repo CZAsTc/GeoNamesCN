@@ -26,6 +26,7 @@ jobs:
           else
             echo "ETags do not match. Continuing the workflow."
             echo "skip=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Check out repository
         if: ${{ steps.compare_etag.outputs.skip != 'true' }}
