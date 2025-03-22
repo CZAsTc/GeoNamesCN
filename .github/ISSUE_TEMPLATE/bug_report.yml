@@ -1,0 +1,60 @@
+name: "Bug Report"
+description: "Please fill out the form below to report a bug."
+labels:
+  - enhancement
+
+body:
+  - type: input
+    attributes:
+      label: "Issue Title"
+      description: "Provide a short title for the bug."
+      placeholder: "E.g. Unable to login."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Description"
+      description: "Please describe the issue you encountered."
+      placeholder: "Describe what happened and how to reproduce it."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Steps to Reproduce"
+      description: "List the steps to reproduce the bug."
+      placeholder: |
+        E.g. 
+        1. Open the app.
+        2. Click on the login button.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Expected Behavior"
+      description: "What did you expect to happen?"
+      placeholder: "Describe what should have happened."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Version"
+      description: "What version of the software are you using?"
+      placeholder: "E.g. 1.2.0"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Screenshots"
+      description: "If applicable, add screenshots to help explain your problem."
+    validations:
+      required: false
+  - type: checkboxes
+    attributes:
+      label: "Prerequisites"
+      options:
+          - label: "I have read and agree to the [Code of Conduct](https://github.com/CZAsTc/GeoNamesCN/.github/CODE_OF_CONDUCT.md)."
+            required: true
+          - label: "I have read and agree to the [Contributing Guidelines](https://github.com/CZAsTc/GeoNamesCN/.github/CONTRIBUTING.md)."
+            required: true
+          - label: "I confirm that this issue has not been mentioned in other [open issues](https://github.com/CZAsTc/GeoNamesCN/issues) or [pull requests](https://github.com/CZAsTc/GeoNamesCN/pulls)."
+            required: true

@@ -1,0 +1,51 @@
+name: "Feature Request"
+description: "Please fill out the form below to request a new feature."
+labels:
+  - bug
+
+body:
+  - type: input
+    attributes:
+      label: "Feature Title"
+      description: "Provide a short title for the feature."
+      placeholder: "E.g. Dark Mode."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Feature Description"
+      description: "Describe the feature you want to request."
+      placeholder: "Provide as much detail as possible."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Use Case"
+      description: "What problem will this feature solve?"
+      placeholder: "Describe the context and how this feature will help users."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Alternatives Considered"
+      description: "Have you considered any alternatives or workarounds?"
+      placeholder: "If any, describe them here."
+    validations:
+      required: false
+  - type: input
+    attributes:
+      label: "Priority"
+      description: "How critical is this feature for you?"
+      placeholder: "E.g. Low, Medium, High."
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: "Prerequisites"
+      options:
+          - label: "I have read and agree to the [Code of Conduct](https://github.com/CZAsTc/GeoNamesCN/.github/CODE_OF_CONDUCT.md)."
+            required: true
+          - label: "I have read and agree to the [Contributing Guidelines](https://github.com/CZAsTc/GeoNamesCN/.github/CONTRIBUTING.md)."
+            required: true
+          - label: "I confirm that this issue has not been mentioned in other [open issues](https://github.com/CZAsTc/GeoNamesCN/issues) or [pull requests](https://github.com/CZAsTc/GeoNamesCN/pulls)."
+            required: true
