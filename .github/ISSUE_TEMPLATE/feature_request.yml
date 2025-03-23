@@ -1,7 +1,7 @@
 name: "Feature Request"
 description: "Please fill out the form below to request a new feature."
 labels:
-  - bug
+  - enhancement
 
 body:
   - type: input

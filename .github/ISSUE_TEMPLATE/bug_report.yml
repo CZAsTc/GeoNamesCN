@@ -1,7 +1,7 @@
 name: "Bug Report"
 description: "Please fill out the form below to report a bug."
 labels:
-  - enhancement
+  - bug
 
 body:
   - type: input

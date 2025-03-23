@@ -70,6 +70,7 @@ jobs:
           git commit -m "${{ env.TAG_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f origin download
+
       - name: Upload to Releases
         if: ${{ steps.compare_etag.outputs.skip != 'true' }}
         uses: softprops/action-gh-release@v2

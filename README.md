@@ -70,7 +70,7 @@ print(df.head())
 2. You must install [aria2](https://aria2.github.io/) and [7-Zip](https://www.7-zip.org/) for essential functionality.  
 3. Clone this repository:  
    ```bash
-   git clone https://github.com/yourusername/GeoNamesCN.git
+   git clone https://github.com/CZAsTc/GeoNamesCN.git
    ```
 4. Install dependencies:  
    ```bash
@@ -82,7 +82,7 @@ print(df.head())
 2. Install [aria2](https://aria2.github.io/) using your package manager (for example, `sudo apt install aria2` on Ubuntu).  
 3. Clone this repository:  
    ```bash
-   git clone https://github.com/yourusername/GeoNamesCN.git
+   git clone https://github.com/CZAsTc/GeoNamesCN.git
    ```
 4. Install dependencies:  
    ```bash

@@ -237,27 +237,6 @@ def export_to_parquet(input_file: str, output_file: str, local_converter: opencc
     df.write_parquet(output_file)
     logging.info("Data written to Parquet file: %s", output_file)
 
-def get_city_zh_name(data_frame: polars.DataFrame, geoname_id: Optional[int]) -> Optional[str]:
-    """Retrieve a city's Chinese name by geoname_id.
-
-    Args:
-        data_frame (polars.DataFrame): Dataset containing geoname entries.
-        geoname_id (Optional[int]): Geoname ID for lookup.
-
-    Returns:
-        Optional[str]: City name in Chinese or None if not found.
-    """
-    if geoname_id is None:
-        return None
-    df_filtered = data_frame.filter(polars.col('geoname_id') == geoname_id)
-    if df_filtered.is_empty():
-        return None
-    result = df_filtered.sort(
-        ['language_precedence', 'is_preferred_name', 'is_short_name'],
-        descending=[False, True, False]
-    ).head(1)
-    return result['alternate_name'].to_numpy().flatten().tolist()[0]
-
 def geonames_download(
     geonames_path: str,
     etag_path: str,

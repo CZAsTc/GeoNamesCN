@@ -35,7 +35,7 @@ GeoNamesCN 是一个用于下载、处理和筛选中文地名数据的项目。
 对于大多数用户，获取最新处理数据的最简单方法是直接从 [最新版本](https://github.com/CZAsTc/GeoNamesCN/releases/latest) 下载已准备好的文件。将 `alternateNamesV2.parquet` 放到 `output/` 文件夹（或任何目录）中，即可立即使用。
 
 ### 2. 本地安装
-如果您希望在本地运行此过程，请参考下方的 [安装](#installation) 部分。安装依赖项后，进入项目文件夹并运行：
+如果您希望在本地运行此过程，请参考下方的 [安装](#安装方法) 部分。安装依赖项后，进入项目文件夹并运行：
 
 ```bash
 cd GeoNamesCN
@@ -70,7 +70,7 @@ print(df.head())
 2. 必须安装 [aria2](https://aria2.github.io/) 和 [7-Zip](https://www.7-zip.org/) 以支持核心功能。  
 3. 克隆该仓库：  
    ```bash
-   git clone https://github.com/yourusername/GeoNamesCN.git
+   git clone https://github.com/CZAsTc/GeoNamesCN.git
    ```
 4. 安装依赖：  
    ```bash
@@ -82,7 +82,7 @@ print(df.head())
 2. 使用包管理器安装 [aria2](https://aria2.github.io/)（例如，在 Ubuntu 上使用 `sudo apt install aria2`）。  
 3. 克隆该仓库：  
    ```bash
-   git clone https://github.com/yourusername/GeoNamesCN.git
+   git clone https://github.com/CZAsTc/GeoNamesCN.git
    ```
 4. 安装依赖：  
    ```bash
