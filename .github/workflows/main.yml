@@ -63,8 +63,8 @@ jobs:
         run: |
           cd upload
           git init
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git checkout -b download
           git add .
           git commit -m "${{ env.TAG_NAME }}"
