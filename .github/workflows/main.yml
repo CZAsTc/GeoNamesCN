@@ -87,7 +87,7 @@ jobs:
         if: ${{ steps.compare_etag.outputs.skip != 'true' }}
         uses: dev-drprasad/delete-older-releases@master
         with:
-          keep_latest: 2
+          keep_latest: 100
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
