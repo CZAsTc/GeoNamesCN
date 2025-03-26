@@ -67,24 +67,32 @@ print(df.head())
 ## Installation
 ### Windows
 1. Install Python 3.9 or higher from the official website.  
-2. You must install [aria2](https://aria2.github.io/) and [7-Zip](https://www.7-zip.org/) for essential functionality.  
-3. Clone this repository:  
+2. Install [aria2](https://aria2.github.io/) and [7-Zip](https://www.7-zip.org/) for essential functionality.  
+3. Clone this repository:
    ```bash
    git clone https://github.com/CZAsTc/GeoNamesCN.git
    ```
-4. Install dependencies:  
+4. Enter the project folder:
+   ```bash
+   cd GeoNamesCN
+   ```
+5. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
 ### Linux / macOS
 1. Ensure Python 3.9 or higher is installed.  
-2. Install [aria2](https://aria2.github.io/) using your package manager (for example, `sudo apt install aria2` on Ubuntu).  
-3. Clone this repository:  
+2. Install [aria2](https://aria2.github.io/) using your package manager (e.g., `sudo apt install aria2` on Ubuntu).  
+3. Clone this repository:
    ```bash
    git clone https://github.com/CZAsTc/GeoNamesCN.git
    ```
-4. Install dependencies:  
+4. Enter the project folder:
+   ```bash
+   cd GeoNamesCN
+   ```
+5. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
@@ -94,6 +102,17 @@ print(df.head())
 2. Checks ETag to only re-download when the dataset updates.  
 3. Uses OpenCC for text conversion (e.g., Traditional to Simplified Chinese).  
 4. Outputs processed data in Parquet format.  
+
+## Contribution Guide
+Contributions are welcome. Feel free to open a pull request after reviewing [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md) for guidelines on how to contribute.
+
+## Code of Conduct
+This project has adopted a Code of Conduct to help create a welcoming, inclusive, and productive community.  
+Please see [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md) for more information.
+
+## Security
+We take security issues seriously. If you discover any vulnerability or potential exploit, please review our 
+[SECURITY.md](.github/SECURITY.md) for guidelines on how to report it responsibly.
 
 ## License
 - The code is released under the MIT License. See the [LICENSE](LICENSE) file.  

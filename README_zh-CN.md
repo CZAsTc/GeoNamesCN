@@ -72,7 +72,11 @@ print(df.head())
    ```bash
    git clone https://github.com/CZAsTc/GeoNamesCN.git
    ```
-4. 安装依赖：  
+4. 进入项目文件夹：  
+   ```bash
+   cd GeoNamesCN
+   ```
+5. 安装依赖：  
    ```bash
    pip install -r requirements.txt
    ```
@@ -84,16 +88,31 @@ print(df.head())
    ```bash
    git clone https://github.com/CZAsTc/GeoNamesCN.git
    ```
-4. 安装依赖：  
+4. 进入项目文件夹：  
+   ```bash
+   cd GeoNamesCN
+   ```
+5. 安装依赖：  
    ```bash
    pip install -r requirements.txt
    ```
 
 ## 工作原理
-1. 通过 aria2 下载 GeoNames 数据，加速数据传输。  
+1. 通过 aria2 下载 GeoNames 数据，实现并行下载。  
 2. 使用 ETag 检查，只在数据集更新时才重新下载。  
 3. 使用 OpenCC 进行文本转换（例如，将繁体字转换为简体字）。  
 4. 将处理后的数据输出为 Parquet 格式。  
+
+## 贡献指南
+欢迎通过分支开发并提交 Pull Request 的方式进行贡献。在提交前，可以浏览[`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md)，了解提交规范和流程。
+
+## 行为准则
+本项目采纳了行为准则，以帮助打造一个包容、有礼、积极协作的社区。  
+详情请参阅 [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md)。
+
+## 安全策略
+如果发现任何安全漏洞或可疑问题，请查看 [SECURITY.md](.github/SECURITY.md)，  
+了解如何在不公开的情况下负责任地报告并协助修复。
 
 ## 许可证
 - 代码以 MIT 许可证发布。请参阅 [LICENSE](LICENSE) 文件。  
