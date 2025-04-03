@@ -7,7 +7,7 @@ import os
 import subprocess
 import logging
 import platform
-from typing import List, Optional
+from typing import Optional
 
 import requests
 import polars
@@ -15,7 +15,7 @@ import opencc
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
-CHINESE_LANGUAGE_CODE: List[str] = [
+CHINESE_LANGUAGE_CODE = [
     'zh-Hans', 'zh-CN', 'cnm', 'zh', 'zho', 'chi', 'zh-Hant', 'zh-TW', 'ja'
 ]
 
@@ -148,12 +148,12 @@ def export_to_parquet(input_file: str, output_file: str, local_converter: opencc
     """Convert 'alternateNamesV2.txt' to a Parquet file, focusing on Chinese data.
 
     This function filters relevant columns, keeps only desired language codes,
-    and uses OpenCC to convert Traditional Chinese to Simplified.
+    and uses OpenCC to convert Traditional Chinese to Simplified Chinese.
 
     Args:
         input_file (str): Path to 'alternateNamesV2.txt'.
         output_file (str): Destination for the Parquet file.
-        local_converter (opencc.OpenCC): Converter for Traditional->Simplified.
+        local_converter (opencc.OpenCC): Converter for Traditional Chinese to Simplified Chinese.
     """
     df = polars.read_csv(
         input_file,
@@ -216,7 +216,7 @@ def export_to_parquet(input_file: str, output_file: str, local_converter: opencc
         descending=[False, False, True, False]
     ).unique(subset=['geoname_id'], keep='first')
 
-    # Convert Traditional->Simplified
+    # Convert Traditional Chinese to Simplified Chinese
     df = df.with_columns(
         polars.col('alternate_name').map_elements(
             local_converter.convert,
@@ -302,7 +302,7 @@ def main(local_converter: opencc.OpenCC) -> None:
     and converts it to Parquet format for future use.
 
     Args:
-        local_converter (opencc.OpenCC): Converter for Traditional->Simplified Chinese.
+        local_converter (opencc.OpenCC): Converter for Traditional Chinese to Simplified Chinese.
     """
     logging.info("Starting GeoNames download and processing...")
 
